@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const API_URL = "https://book-management-system-vris.onrender.com/api/books";
+
 function BookForm({ onBookSaved, editingBook, onCancelEdit }) {
   const [formData, setFormData] = useState({
     title: "",
@@ -57,11 +59,9 @@ function BookForm({ onBookSaved, editingBook, onCancelEdit }) {
     try {
       setLoading(true);
 
-      const API_URL = "https://book-management-system-vris.onrender.com/api/books";
-
-const url = editingBook
-  ? `${API_URL}/${editingBook.id}`
-  : API_URL;
+      const url = editingBook
+        ? `${API_URL}/${editingBook.id}`
+        : API_URL;
 
       const method = editingBook ? "PUT" : "POST";
 
@@ -101,6 +101,7 @@ const url = editingBook
 
       onBookSaved();
     } catch (error) {
+      console.error(error);
       alert(error.message);
     } finally {
       setLoading(false);
@@ -116,7 +117,6 @@ const url = editingBook
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Book Title</label>
-
           <input
             type="text"
             name="title"
@@ -128,7 +128,6 @@ const url = editingBook
 
         <div className="form-group">
           <label>Author</label>
-
           <input
             type="text"
             name="author"
@@ -140,7 +139,6 @@ const url = editingBook
 
         <div className="form-group">
           <label>Category</label>
-
           <input
             type="text"
             name="category"
@@ -152,7 +150,6 @@ const url = editingBook
 
         <div className="form-group">
           <label>Price</label>
-
           <input
             type="number"
             name="price"
@@ -165,7 +162,6 @@ const url = editingBook
 
         <div className="form-group">
           <label>Quantity</label>
-
           <input
             type="number"
             name="quantity"
